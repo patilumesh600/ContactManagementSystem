@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Management System - Develop By Umesh Patil (patil.umesh600@gmail.com)</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <style>
+        .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+            color: #FFF
+        }
+
+        .navbar-inverse {
+            color: #FFF;
+            background-color: #20bf55;
+            background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+        }
+
+        .Heading {
+            font-weight: 600;
+        }
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Contact Management System", "PersonContactList", "Person", new { area = "" }, new { @class = "navbar-brand Heading" })
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+                    <li style="font-weight:600">@Html.ActionLink("Contact List", "PersonContactList", "Person")</li>
+                    <li style="font-weight:600">@Html.ActionLink("Add Contact", "Person", "Person")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="col-md-12">
+            @RenderBody()
+        </div>
+        <div class="clearfix"></div>
+        <footer>
+            <div style="border-top:1px solid #d3d3d3 !important;margin-top:5px;padding-top:5px;">
+                <p>&copy; @DateTime.Now.Year - Develop By Umesh Patil <a href="mailto:patil.umesh600@gmail.com">(patil.umesh600@gmail.com)</a> </p>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model List<ContactManagementSystem.Context.Person_Contact>
+@{
+    ViewBag.Title = "PersonContactList";
+}
+
+<h4> Contact List</h4>
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table table-hover table-striped table-responsive" style="margin-bottom: 0px !important;border:1px solid #d3d3d3;">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Email </th>
+                <th>Phone Number</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model)
+            {
+                string status = "Active";
+                string btnStatus = "InActive";
+                if (contact.Status == false)
+                {
+                    status = "InActive";
+                    btnStatus = "Active";
+                }
+                <tr>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.MiddleName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.Email </td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>@status</td>
+                    <td>
+                        @*<a href="#"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="#"><i class="glyphicon glyphicon-trash"></i></a>*@
+
+                        <a href="@Url.Action("Person", new { contact.ID, contact.FirstName, contact.MiddleName, contact.LastName, contact.Email, contact.PhoneNumber, contact.Status, contact.IsDeleted, contact.CreatedDate, contact.ModifiedDate })" class="btn btn-success"> Edit</a>
+                        @*<a href="@Url.Action("DeleteContact", new { contact.ID})" class="btn btn-danger">Delete</a>*@
+                        <a href="@Url.Action("ActiveOrInActiveContact", new { contact.ID })" class="btn btn-danger">@btnStatus</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div><h2>Contacts not found </h2></div>
+}
