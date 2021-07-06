@@ -113,7 +113,6 @@ D:\Work\ContactManagementSystem\ContactManagementSystem\bin\System.Web.WebPages.
 D:\Work\ContactManagementSystem\ContactManagementSystem\bin\Newtonsoft.Json.xml
 D:\Work\ContactManagementSystem\ContactManagementSystem\bin\Antlr3.Runtime.pdb
 D:\Work\ContactManagementSystem\ContactManagementSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Work\ContactManagementSystem\ContactManagementSystem\obj\Debug\ContactManagementSystem.csprojAssemblyReference.cache
 D:\Work\ContactManagementSystem\ContactManagementSystem\obj\Debug\ContactManagementSystem.csproj.CoreCompileInputs.cache
 D:\Work\ContactManagementSystem\ContactManagementSystem\obj\Debug\ContactManagementSystem.csproj.CopyComplete
 D:\Work\ContactManagementSystem\ContactManagementSystem\obj\Debug\ContactManagementSystem.dll
