@@ -1,0 +1,236 @@
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'CONTACT_MGMT_DB')
+BEGIN
+  CREATE DATABASE CONTACT_MGMT_DB;
+END;
+GO
+
+
+USE [CONTACT_MGMT_DB]
+GO
+
+/****** Object:  Table [dbo].[PersonContact]    Script Date: 06-07-2021 22:11:12 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PersonContact]') AND type in (N'U'))
+DROP TABLE [dbo].[PersonContact]
+GO
+/****** Object:  Table [dbo].[Person_Contact]    Script Date: 06-07-2021 22:11:12 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Person_Contact]') AND type in (N'U'))
+DROP TABLE [dbo].[Person_Contact]
+GO
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 06-07-2021 22:11:12 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[__MigrationHistory]') AND type in (N'U'))
+DROP TABLE [dbo].[__MigrationHistory]
+GO
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 06-07-2021 22:11:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__MigrationHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ContextKey] [nvarchar](300) NOT NULL,
+	[Model] [varbinary](max) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC,
+	[ContextKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Person_Contact]    Script Date: 06-07-2021 22:11:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Person_Contact](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[MiddleName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
+	[Email] [varchar](100) NULL,
+	[PhoneNumber] [varchar](20) NULL,
+	[Status] [bit] NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[ModifiedDate] [datetime] NULL,
+ CONSTRAINT [PK_Person_Contact] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PersonContact]    Script Date: 06-07-2021 22:11:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PersonContact](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](max) NULL,
+	[MiddleName] [nvarchar](max) NULL,
+	[LastName] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[Status] [bit] NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[ModifiedDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.PersonContact] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[__MigrationHistory] ([MigrationId], [ContextKey], [Model], [ProductVersion]) VALUES (N'202107061323442_InitialCreate', N'ContactManagementSystem.Context.ContactManagementDbContext', 0x1F8B0800000000000400CD58DB6EE336107D2FD07F10F4D4025933C916451BC8BBC8DA49616C9C18ABECBE53D2D8264A91AA4805F6B7F5A19FD45FE850D6859225478EB341112090A9E1992BCF0CF5EFDFFF781F3731779E20554C8AB17B313A771D10A18C98588DDD4C2FDFFDE67EFCF0E30FDE4D146F9C6FA5DC7B23873B851ABB6BAD932B4254B88698AA51CCC2542AB9D4A350C68446925C9E9FFF4E2E2E0820848B588EE37DC9846631E43FF0E7448A10129D513E97117055ACE31B3F4775EE690C2AA1218C5D94D534D4732AE80A6210DADF2A0DF1C8ACC346BBCE356714CDF2812F5D870A2135D568F4D55705BE4EA558F9092E50FEB84D00E596942B289CB9AAC587FA757E69FC22F5C6122ACC9496F1918017EF8B4091F6F61785DBAD0289A1BCC190EBADF13A0FE7D85D6036A528E2E93A6D8D57139E1AE9FE90EF92356AE09C393DD26755F56091993F94CCB8CE52180BC8744AF999B3C802CEC2CFB07D947F82188B8C73DB057402DF3516706991CA0452BDFD02CBC2B1D9D47548731F696FACB6597B76DECE84FEF517D7B947E534E050558815195FCB14FE000129D5102DA8D69062826711E431DED3DED275CB52A5CD63A912EB12CF9BEBCCE9E60EC44AAFC72E3EBACE2DDB4054AE14667C150C8F276ED26906CF699AB328E2F026AAEEE81BF9741353C6BFBB96C55A0AB8CFE200D2EFAECBC7B2CA54A9E693941CA8E8A8C0C3283335050E588FA7024D5230653DC57F2594797E6426B947622145B025EB03B3F77AA426A87DDACA4985E1812B6D6C93CC34A81AC01E9121F3175CA68A84346DDEA9F0417713636DD7AEAB8C5AEFBBBCA8ECAD5B19D9F5B2B2E7919EA6E7CD6992609D594DB05871FCA203BEF38FEF06F10E8384AAA32954D6569A90E030B0ADB726EC11E4EC8539A40135F99F447187586F767A225F2AEE4A409BF0EB7C94BBCC734F5D34A783D141E43AD4B7E8BDD99D07022A2B9FB12C47F043CA69DAD15D269267B1E8EB5087765BFDC206B1968763D91DC106B3D787A3D5A46F63D5ABC3910A56B7618AA5E1180DCEB6911A2F86E395BC6C43956BC3512C5E6E9440BD3C1CAB41CD365AE3C511D5D0A0E7463D34DEEC237AA47554DAA794EC1DD3D644D63EFB8758B42D5269AFD8B4C59A5EC16043EE132D4ADB89B80E86EA894586CE0A0E310223FF2F3EE10CFDAD05906CD81294DE0DAD2E4EF197AD5BC8FFE74640948AF831D782371FBF03B66226BACFCED8474E227B43B778A269B8A6E94F31DDFC6CC3BD6CB03E09AE3D3C9F04D618904F42EA18824FC26B0EBA01D3A70FB92F01E91870237CD6AF35E07681ED87E7D881B73D79BDEA0CBB233D343D90E8C5CEE4D71973F789D823F6E71F6F0A8AAD6A08F33148406818AE062D65666229CB04A0AFB645A5483B3FA029E6835EA79A2DD10F7C1D8252F945EE1BE5597E5E028866E221D349A6AF958238E08D3BBC470EEBCF67F9A6CDDE43627EA9D77001CD64A6A41EC4A78CF1A8B2FB76BF3EFB204CF5145C8A56E14516E156DB0AE91E8FF930A0227C53484018267E8438E108A61E844F9FE025B6E1EDEC0E5634DC96FDB41FE4F94434C3EE4D195DA534560546BDDF7CD224E69BE687FF00B38F88BC05150000, N'6.1.3-40302')
+GO
+SET IDENTITY_INSERT [dbo].[Person_Contact] ON 
+GO
+INSERT [dbo].[Person_Contact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (1, N'Umesh', N'Pradip', N'Patil', N'umesh@gmail.in', N'9623198305', 1, 0, CAST(N'2021-07-06T18:32:55.033' AS DateTime), CAST(N'2021-07-06T18:32:55.033' AS DateTime))
+GO
+INSERT [dbo].[Person_Contact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (2, N'Rahul', N'Pardip', N'Patil', N'rahul12@gmail.in', N'7875202190', 1, 0, CAST(N'2021-07-06T18:24:25.573' AS DateTime), CAST(N'2021-07-06T18:24:25.573' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Person_Contact] OFF
+GO
+SET IDENTITY_INSERT [dbo].[PersonContact] ON 
+GO
+INSERT [dbo].[PersonContact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (1, N'Umesh', N'Pradip', N'Patil', N'umesh@gmail', N'9623198304', 1, 0, CAST(N'2021-07-06T19:02:50.563' AS DateTime), CAST(N'2021-07-06T21:15:19.913' AS DateTime))
+GO
+INSERT [dbo].[PersonContact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (2, N'Rahul', NULL, NULL, N'rahul@gmail.com', N'8786576577', 1, 0, CAST(N'2021-07-06T19:03:13.857' AS DateTime), CAST(N'2021-07-06T21:15:21.433' AS DateTime))
+GO
+INSERT [dbo].[PersonContact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (3, N'Sagar', N'Arjun', N'Prajapati', N'sagar@gmail.com', N'9665272717', 1, 0, CAST(N'2021-07-06T19:51:22.350' AS DateTime), CAST(N'2021-07-06T21:15:22.963' AS DateTime))
+GO
+INSERT [dbo].[PersonContact] ([ID], [FirstName], [MiddleName], [LastName], [Email], [PhoneNumber], [Status], [IsDeleted], [CreatedDate], [ModifiedDate]) VALUES (4, N'Rajesh', NULL, NULL, N'rajesh@gmail.com', N'9567657657', 1, 0, CAST(N'2021-07-06T20:47:59.367' AS DateTime), CAST(N'2021-07-06T21:15:24.497' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[PersonContact] OFF
+GO
+/****** Object:  StoredProcedure [dbo].[GET_ALL_PERSON_CONTACT_LIST]    Script Date: 06-07-2021 22:11:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GET_ALL_PERSON_CONTACT_LIST]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT ID ,FirstName, MiddleName , LastName, PhoneNumber, [Status] , IsDeleted , CreatedDate, ModifiedDate from Person_Contact
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ManagePerson]    Script Date: 06-07-2021 22:11:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[ManagePerson]
+	-- Add the parameters for the stored procedure here
+	@Mode varchar(20) = null,
+	@ID bigint = null,
+	@FirstName varchar(50) = null,
+	@MiddleName varchar(50) = null,
+	@LastName varchar(50) =  null,
+	@Email varchar(100) =  null,
+	@PhoneNumber varchar(20) = null,
+	@Status bit = null,
+	@IsDeleted bit = null
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	if(@Mode = 'LIST')
+	Begin
+		SELECT [ID]
+		  ,[FirstName]
+		  ,ISNULL([MiddleName],'') as MiddleName
+		  ,ISNULL([LastName],'') as LastName
+		  ,[Email]
+		  ,[PhoneNumber]
+		  ,[Status]
+		  ,[IsDeleted]
+		  ,[CreatedDate]
+		  ,[ModifiedDate]
+	  FROM [CONTACT_MGMT_DB].[dbo].[PersonContact]
+	  --Order BY ID DESC
+	  Order BY [Status] DESC
+	END
+	
+	if(@Mode = 'CREATE')
+	Begin
+		INSERT INTO [dbo].[PersonContact]
+				   ([FirstName]
+				   ,[MiddleName]
+				   ,[LastName]
+				   ,[Email]
+				   ,[PhoneNumber]
+				   ,[Status]
+				   ,[IsDeleted]
+				   ,[CreatedDate]
+				   ,[ModifiedDate])
+			 VALUES
+				   (@FirstName
+				   ,@MiddleName
+				   ,@LastName
+				   ,@Email
+				   ,@PhoneNumber
+				   ,@Status
+				   ,1
+				   ,GETDATE()
+				   ,NULL)
+			Select 'Inserted'  ;
+	END
+	if(@Mode = 'UPDATE')
+	BEGIN
+	UPDATE [dbo].[PersonContact]
+	   SET [FirstName] = @FirstName
+		  ,[MiddleName] = @MiddleName
+		  ,[LastName] = @LastName
+		  ,[Email] = @Email
+		  ,[PhoneNumber] = @PhoneNumber
+		  ,[Status] = @Status
+		  ,[IsDeleted] = @IsDeleted
+		  ,[ModifiedDate] = GETDATE()
+		WHERE ID = @ID
+		 Select 'Record Updated Successfully...!'  ;
+	END
+
+    if(@Mode = 'DELETE')
+	BEGIN
+		DECLARE @newSTATUS AS bit = 0;
+		if((Select [Status] from [PersonContact]  WHERE ID = @ID)=1)
+		begin
+		SET @newSTATUS=0;
+		end
+		ELSE
+		begin
+		SET @newSTATUS=1;
+		end
+		UPDATE [dbo].[PersonContact]
+	   SET 
+		   [Status] = @newSTATUS
+		  ,[IsDeleted] = 0
+		  ,[ModifiedDate] = GETDATE()
+		   WHERE ID = @ID
+		  --SELECT @ID
+		  Select 'Record Inactive Successfully...!'  ;
+	END
+
+
+END
+GO
